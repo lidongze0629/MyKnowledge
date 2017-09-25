@@ -1,0 +1,19 @@
+1、Bash维护了一个历史记录文件~/.bash_history,用于保存用户运行过的命令。
+2、printf输出引用文本或空格分隔参数，printf "%-5s %-10s &-4.2f\n" 3 Jeff 77.43 , 需要手动添加换行
+3、echo 命令 -n 参数忽略结尾的换行符，注意是本次的输出没有换行。
+4、echo -e 参数可以包含转义序列的字符串 ，echo -e "1\t2\t3" 来打印制表符
+5、echo 可以彩色输出 echo -e "\e[46;34mlidongze \e[0m" , 替换46,34即可，后面的0为重置,46代表字体颜色，34代表背景颜色。
+6、Bash中，每一个变量的值都是字符串，即便赋值时候没有使用引号。
+7、使用env命令查看所有与终端相关的环境变量
+8、对于进程来说，使用 cat /proc/$PID/environ 查看某个进程运行时的环境变量,输出由null(\0)字符间隔，若将\0替换成\n,用如下tr命令即可：cat /proc/$PID/environ | tr '\0' '\n'
+9、shell脚本 变量赋值形式 var=value,如果value中不含有空白等则不需要引号，否则需要引号。
+10、变量输出 echo "$var" 或 echo "${var}"
+11、export命令用来设置环境变量，至此之后，当前shell脚本执行的任何应用程序都会集成这个变量。
+12、获取字符串的长度 length=${#var}
+13、检测是否为超级用户，使用UID环境变量，root为0,其余的均不为0.
+    if [ $UID -ne 0 ]; then
+        echo Non root user.
+    else
+        echo Root user
+    fi
+14、

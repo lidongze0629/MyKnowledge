@@ -1,0 +1,9 @@
+#!/usr/bin/expect
+set timeout 10
+spawn ssh-keygen -t rsa
+expect {
+"*.ssh/id_rsa):*" {send "\n\r"; exp_continue}
+"*for no passphrase):*" {send "\n\r"; exp_continue}
+"*same passphrase again:*" {send "\n\r" }
+}
+expect eof
