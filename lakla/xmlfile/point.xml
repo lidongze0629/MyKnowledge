@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<setup xmlns="http://databene.org/benerator/0.9.8"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://databene.org/benerator/0.9.8 http://databene.org/benerator-0.9.8.xsd">
+
+    <!-- ........csv.......platform.............. -->
+    <import platforms="csv"/>
+
+    <!-- ..........id........class....CSV -->
+    <bean id="out" class="CSVEntityExporter">
+        <!-- ....................................bin........windows.......... -->
+        <property name="uri" value="/home/lidongze/huawei/data/lakla_data/point.csv"/>
+        <!--<property name="uri" value="target\\example.csv"/>-->
+        <property name="encoding" value="UTF-8"/>
+        <!-- quoteEmpty.false..................true.............."".Miner.........................false -->
+        <property name="quoteEmpty" value="false"/>
+        <!-- headless.true...........................attr1,attr2....Miner....................................true.. -->
+        <property name="headless" value="true"/>
+        <!-- endWithNewLine.......................Miner............................................true...........................................true -->
+        <property name="endWithNewLine" value="true"/>
+    </bean>
+
+    <!-- count.......... -->
+    <!-- pageSize.....................................................1000 -->
+    <!-- consumer="out",..out....bean.id. -->
+    <generate count="100" pageSize="5000" consumer="out">
+        <!-- .................attribute......attribute..... -->
+        <!-- .......................................... -->
+
+        <variable name="vertextype" values="'ApplyInfo','Terminal','BankCard','Mobile'" />
+        <variable name="id" type="long" generator="new org.databene.benerator.primitive.IncrementalIdGenerator(1)" />
+        <variable name="labelValue" values="'0','1','2'"/>
+       
+        <attribute name="vertexID" script="id" />
+        <attribute name="vertexType" script="vertextype" />
+        <attribute name="orderNo" pattern="[A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9]" />
+        <attribute name="status" pattern="[A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9]" />
+        <attribute name="appTime" pattern="[A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z]" />
+        <attribute name="status2" pattern="[A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9]" />
+        <attribute name="historyOverdueTime" type="int" min="0" max="10000" />
+        <attribute name="currentOverdueTime" type="int" min="0" max="10000" />
+        <attribute name="Identification" pattern="[A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9][A-Z][a-z][0-9]" />
+        <attribute name="label" script="labelValue" />
+        <attribute name="phoneNum" pattern="^(13[0-9]|15[012356789]|17[013678]|18[0-9]|14[57])[0-9]{8}$"/>
+        <attribute name="bankcardNum" pattern="^([0-9]|[012356789]|1732[012345678]|1855[0-9]|144[57])[0-9]{8}$"/>
+
+
+    </generate>
+
+    <!-- .............. -->
+    <echo>Generated data example.csv success!</echo>
+
+</setup>
